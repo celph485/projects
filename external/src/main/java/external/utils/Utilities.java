@@ -5,10 +5,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 final public class Utilities {
@@ -37,11 +37,13 @@ final public class Utilities {
         return Direction.E;
     }
 
-    public static String formatGpsTime(final String timeInMills, final String expectedFormat){
+    public static String formatGpsTime(final String timeInSeconds, final String expectedFormat){
+        LOGGER.debug("formatGpsTime | timeInSeconds: {}, expectedFormat: {}",timeInSeconds, expectedFormat);
+        Long timeInMills = Long.valueOf(timeInSeconds) * 1000;
         LOGGER.debug("formatGpsTime | timeInMills: {}, expectedFormat: {}",timeInMills, expectedFormat);
-        LocalDateTime localDateTime = convertMillisToCalendar(Long.valueOf(timeInMills));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(expectedFormat, Locale.ENGLISH);
-        return formatter.format(localDateTime);
+        Date date = new Date(timeInMills);
+        SimpleDateFormat formatter = new SimpleDateFormat(expectedFormat);
+        return formatter.format(date);
     }
 
     public static LocalDateTime convertMillisToCalendar(final long timeInMills){

@@ -51,7 +51,7 @@ public class Application {
     	gpsEvent.setBatteryVoltage("5.5");
     	gpsEvent.setLattitude("76.34343");
     	gpsEvent.setLongitude("34.5555");
-    	gpsEvent.setTime("1532876366");
+    	gpsEvent.setTime("1532877542");
     	gpsEvent.setSpeed("60");
     	System.out.println("gpsEvent: "+gpsEvent);
     	ExternalRequest request = ExternalRequestFactory.getInstance().createExternalRequest(gpsEvent);

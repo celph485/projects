@@ -15,6 +15,7 @@ import org.springframework.jms.support.converter.MessageType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import external.model.ExternalRequest;
+import external.model.ExternalResponse;
 import external.model.GpsEvent;
 
 
@@ -40,11 +41,11 @@ public class Application {
         return converter;
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         SpringApplication.run(Application.class, args);
     }
     
-    public static void main1(String arg[]) throws Exception {
+    public static void main(String arg[]) throws Exception {
     	System.out.println("Hell oWorld!!");
     	GpsEvent gpsEvent = new GpsEvent();
     	gpsEvent.setImeiNo("387785175687813");
@@ -59,5 +60,9 @@ public class Application {
     	ObjectMapper mapper = new ObjectMapper();
     	String data = mapper.writeValueAsString(request);
     	System.out.println("data: "+data);
+    	
+    	String resData = "{\"status\":\"true\"}";
+    	ExternalResponse response = mapper.readValue(resData, ExternalResponse.class);
+    	System.out.println("response: "+response);
     } 
 }

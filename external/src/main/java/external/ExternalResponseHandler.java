@@ -22,7 +22,7 @@ class ExternalResponseHandler {
     Boolean handle(final ExternalRequest request, final ExternalResponse response){
         LOGGER.info("External Response: {}", response);
 
-        if(isNegativeRepose(response)){
+        if(!isPositiveRepose(response)){
             LOGGER.info("Negative response, sending request and response to ExternalResponseFailureHandler");
             return failureHandler.handle(request, response);
         }
@@ -32,8 +32,10 @@ class ExternalResponseHandler {
     }
 
 
-    private Boolean isNegativeRepose(final ExternalResponse response){
-        return ! Constants.TRUE.equalsIgnoreCase(response.getResult());
+    private Boolean isPositiveRepose(final ExternalResponse response){
+    	return 
+    			Constants.TRUE.equalsIgnoreCase(response.getStatus()) ||
+    			Constants.TRUE.equalsIgnoreCase(response.getResult());
     }
 
 

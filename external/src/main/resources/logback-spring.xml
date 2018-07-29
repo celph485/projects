@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}"/>
+    <property name="LOG_FILE" value="/tmp/logs/external/spring.log}"/>
     <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
     <appender name="ERROR-FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>external-failed.log</file>
+        <file>/tmp/logs/external/external-failed.log</file>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 %d{yyyy-MM-dd HH:mm:ss} %msg%n
@@ -15,7 +15,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>${LOGS_HOME}myProject_log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>/tmp/logs/external/external-log.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

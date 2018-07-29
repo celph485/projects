@@ -18,6 +18,7 @@ final public class Utilities {
     public static Direction getDirectionForLatitudeDegreeDecimal(final String latitude){
         LOGGER.debug("getDirectionForLatitudeDegreeDecimal | latitude: {}",latitude);
         Double lat = Double.valueOf(latitude);
+        LOGGER.info("latitude: ",lat);
         /***
          * some sort of calc to determine this,
          * but now we're expecting it to be in India only so N
@@ -28,6 +29,7 @@ final public class Utilities {
     public static Direction getDirectionForLongitudeDegreeDecimal(final String longitude){
         LOGGER.debug("getDirectionForLongitudeDegreeDecimal | longitude: {}",longitude);
         Double lon = Double.valueOf(longitude);
+        LOGGER.info("longitude: ",lon);
         /***
          * some sort of calc to determine this,
          * but now we're expecting it to be in India only so E

@@ -5,8 +5,6 @@ import javax.jms.ConnectionFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -14,7 +12,10 @@ import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
-import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import external.model.ExternalRequest;
+import external.model.GpsEvent;
 
 
 @SpringBootApplication
@@ -39,14 +40,24 @@ public class Application {
         return converter;
     }
 
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-
-
     public static void main(String[] args) {
-        // Launch the application
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
+    
+    public static void main1(String arg[]) throws Exception {
+    	System.out.println("Hell oWorld!!");
+    	GpsEvent gpsEvent = new GpsEvent();
+    	gpsEvent.setImeiNo("387785175687813");
+    	gpsEvent.setBatteryVoltage("5.5");
+    	gpsEvent.setLattitude("76.34343");
+    	gpsEvent.setLongitude("34.5555");
+    	gpsEvent.setTime("1532876366");
+    	gpsEvent.setSpeed("60");
+    	System.out.println("gpsEvent: "+gpsEvent);
+    	ExternalRequest request = ExternalRequestFactory.getInstance().createExternalRequest(gpsEvent);
+    	System.out.println("request: "+request);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String data = mapper.writeValueAsString(request);
+    	System.out.println("data: "+data);
+    } 
 }

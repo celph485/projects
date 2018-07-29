@@ -44,7 +44,7 @@ final class ExternalRequestFactory {
                 analogPort2,
                 angle,
                 satellite,
-                time,
+                timeInMills,
                 batteryVoltage,
                 gpsValidity
         );

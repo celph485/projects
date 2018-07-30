@@ -2,6 +2,7 @@ package external;
 
 import javax.jms.ConnectionFactory;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
@@ -41,11 +42,11 @@ public class Application {
         return converter;
     }
 
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
     
-    public static void main(String arg[]) throws Exception {
+    public static void main1(String arg[]) throws Exception {
     	System.out.println("Hell oWorld!!");
     	GpsEvent gpsEvent = new GpsEvent();
     	gpsEvent.setImeiNo("387785175687813");
@@ -58,6 +59,7 @@ public class Application {
     	ExternalRequest request = ExternalRequestFactory.getInstance().createExternalRequest(gpsEvent);
     	System.out.println("request: "+request);
     	ObjectMapper mapper = new ObjectMapper();
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     	String data = mapper.writeValueAsString(request);
     	System.out.println("data: "+data);
     	
